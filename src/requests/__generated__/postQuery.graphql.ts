@@ -3,27 +3,31 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
-export type postsQueryVariables = {};
-export type postsQueryResponse = {
-    readonly posts: ReadonlyArray<{
+export type postQueryVariables = {
+    id: string;
+};
+export type postQueryResponse = {
+    readonly post: {
         readonly id: string;
         readonly content: string;
         readonly title: string;
         readonly author: {
             readonly login: string;
         };
-    }>;
+    };
 };
-export type postsQuery = {
-    readonly response: postsQueryResponse;
-    readonly variables: postsQueryVariables;
+export type postQuery = {
+    readonly response: postQueryResponse;
+    readonly variables: postQueryVariables;
 };
 
 
 
 /*
-query postsQuery {
-  posts {
+query postQuery(
+  $id: String!
+) {
+  post(id: $id) {
     id
     content
     title
@@ -36,28 +40,42 @@ query postsQuery {
 */
 
 const node: ConcreteRequest = (function(){
-var v0 = {
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "id"
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "id"
+  }
+],
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v1 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "content",
   "storageKey": null
 },
-v2 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "title",
   "storageKey": null
 },
-v3 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -66,22 +84,22 @@ v3 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "postsQuery",
+    "name": "postQuery",
     "selections": [
       {
         "alias": null,
-        "args": null,
+        "args": (v1/*: any*/),
         "concreteType": "Post",
         "kind": "LinkedField",
-        "name": "posts",
-        "plural": true,
+        "name": "post",
+        "plural": false,
         "selections": [
-          (v0/*: any*/),
-          (v1/*: any*/),
           (v2/*: any*/),
+          (v3/*: any*/),
+          (v4/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -90,7 +108,7 @@ return {
             "name": "author",
             "plural": false,
             "selections": [
-              (v3/*: any*/)
+              (v5/*: any*/)
             ],
             "storageKey": null
           }
@@ -103,21 +121,21 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "postsQuery",
+    "name": "postQuery",
     "selections": [
       {
         "alias": null,
-        "args": null,
+        "args": (v1/*: any*/),
         "concreteType": "Post",
         "kind": "LinkedField",
-        "name": "posts",
-        "plural": true,
+        "name": "post",
+        "plural": false,
         "selections": [
-          (v0/*: any*/),
-          (v1/*: any*/),
           (v2/*: any*/),
+          (v3/*: any*/),
+          (v4/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -126,8 +144,8 @@ return {
             "name": "author",
             "plural": false,
             "selections": [
-              (v3/*: any*/),
-              (v0/*: any*/)
+              (v5/*: any*/),
+              (v2/*: any*/)
             ],
             "storageKey": null
           }
@@ -137,14 +155,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6b3faed7207ca084c752ff1836d00cc6",
+    "cacheID": "41cbca1e2b2aea618d0a1294cc5904e8",
     "id": null,
     "metadata": {},
-    "name": "postsQuery",
+    "name": "postQuery",
     "operationKind": "query",
-    "text": "query postsQuery {\n  posts {\n    id\n    content\n    title\n    author {\n      login\n      id\n    }\n  }\n}\n"
+    "text": "query postQuery(\n  $id: String!\n) {\n  post(id: $id) {\n    id\n    content\n    title\n    author {\n      login\n      id\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '51740f5c5d5fa8edefd2f45aa99eff00';
+(node as any).hash = '1b360a0b4d753c8e066ee58ad029c492';
 export default node;

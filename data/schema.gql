@@ -34,18 +34,22 @@ type Post {
   author: User!
   content: String!
   id: ID!
+  title: String!
 }
 
 input PostInput {
   content: String!
+  title: String!
 }
 
 type Query {
   comment(id: String!): Post!
   comments: [Comment!]!
+  commentsByPostId(postId: String!): [Comment!]!
   login(login: String!, password: String!): LoginOutput!
   post(id: String!): Post!
   posts: [Post!]!
+  postsByUserId(userId: String!): [Post!]!
   user(id: String!): User!
   users: [User!]!
 }
@@ -53,11 +57,13 @@ type Query {
 """USER model"""
 type User {
   id: ID!
-  login: String
+  login: String!
+  name: String
   password: String!
 }
 
 input UserInput {
   login: String!
+  name: String
   password: String!
 }

@@ -1,0 +1,20 @@
+.post-block {
+	&__content {
+		width: 80%;
+		margin: 40px auto;
+	}
+
+	&__post-text {
+		margin-bottom: 40px;
+	}
+}
+
+.post-block_border-none {
+	border: none;
+}
+
+.post-header {
+	&__user-info {
+		margin: 15px auto;
+	}
+}

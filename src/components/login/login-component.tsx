@@ -4,70 +4,70 @@ import { useHistory } from 'react-router-dom';
 
 import { JWT_AUTH_TOKEN_KEY } from '../../constants/constants';
 import { loginQuery } from '../../requests/login';
+import { loginQuery as LoginQueryType } from '../../requests/__generated__/loginQuery.graphql';
 
 interface ILoginErrorProps {
-    error: boolean;
+	error: boolean;
 }
 
-const LoginError: React.FunctionComponent<ILoginErrorProps> = ({error}: ILoginErrorProps) => {
-    if (error) {
-        return <div>Ошибка входа</div>
-    } else {
-        return null;
-    }
+const LoginErrorComponent: React.FunctionComponent<ILoginErrorProps> = ({ error }: ILoginErrorProps) => {
+	if (error) {
+		return <div>Ошибка входа</div>
+	} else {
+		return null;
+	}
 }
 
-export const Login: React.FunctionComponent = () => {
-    const [login, setLogin] = React.useState<string>('');
-    const [password, setPassword] = React.useState<string>('');
-    const [error, setError] = React.useState<boolean>(false);
+export const LoginComponent: React.FunctionComponent = () => {
+	const [login, setLogin] = React.useState<string>('');
+	const [password, setPassword] = React.useState<string>('');
+	const [error, setError] = React.useState<boolean>(false);
 
-    const history = useHistory();
+	const history = useHistory();
 
-    const environment = useRelayEnvironment();
+	const environment = useRelayEnvironment();
 
-    const handleChangeLogin = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        setLogin(event.target.value);
-        handleChangeError(false);
-    }, []);
+	const handleChangeError = React.useCallback((event: boolean) => {
+		setError(event);
+	}, []);
 
-    const handleChangePassword = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
-        handleChangeError(false);
-    }, []);
+	const handleChangeLogin = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		setLogin(event.target.value);
+		handleChangeError(false);
+	}, [handleChangeError]);
 
-    const handleChangeError = React.useCallback((event: boolean) => {
-        setError(event);
-    }, []);
+	const handleChangePassword = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		setPassword(event.target.value);
+		handleChangeError(false);
+	}, [handleChangeError]);
 
-    const submitButtonDisabled = !login || !password;
+	const submitButtonDisabled = !login || !password;
+
+	const handleSubmit = React.useCallback(() => {
+		fetchQuery<LoginQueryType>(
+			environment,
+			loginQuery,
+			{ login, password },
+		).subscribe({
+			next: (data: LoginQueryType['response']) => {
+				localStorage.setItem(JWT_AUTH_TOKEN_KEY, data.login.accessToken);
+				history.replace({ pathname: '/main' });
+			},
+			error: () => {
+				handleChangeError(true);
+			}
+		})
 
 
-    const handleSubmit = React.useCallback(() => {
-        fetchQuery(
-            environment,
-            loginQuery,
-            { login, password },
-        ).subscribe({
-            next: (data: any) => {
-                localStorage.setItem(JWT_AUTH_TOKEN_KEY, data.login.accessToken);
-                history.replace({pathname: '/'});
-            },
-            error: () => {
-                handleChangeError(true);
-            }
-        })
+	}, [environment, login, password, history, handleChangeError]);
 
+	return (
+		<div>
+			<LoginErrorComponent error={error}></LoginErrorComponent>
+			<input type="text" value={login} onChange={handleChangeLogin} />
+			<input type="password" value={password} onChange={handleChangePassword} />
+			<button disabled={submitButtonDisabled} onClick={handleSubmit}>Войти</button>
+		</div>
+	);
 
-    }, [environment, login, password, history]);
-
-    return (
-        <div>
-            <LoginError error={error}></LoginError>
-            <input type="text" value={login} onChange={handleChangeLogin} />
-            <input type="password" value={password} onChange={handleChangePassword} />
-            <button disabled={submitButtonDisabled} onClick={handleSubmit}>Войти</button>
-        </div>
-    );
-        
 }

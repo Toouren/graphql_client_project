@@ -3,30 +3,32 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
-export type postsQueryVariables = {};
-export type postsQueryResponse = {
-    readonly posts: ReadonlyArray<{
+export type commentsByPostIdQueryVariables = {
+    postId: string;
+};
+export type commentsByPostIdQueryResponse = {
+    readonly commentsByPostId: ReadonlyArray<{
         readonly id: string;
         readonly content: string;
-        readonly title: string;
         readonly author: {
             readonly login: string;
         };
     }>;
 };
-export type postsQuery = {
-    readonly response: postsQueryResponse;
-    readonly variables: postsQueryVariables;
+export type commentsByPostIdQuery = {
+    readonly response: commentsByPostIdQueryResponse;
+    readonly variables: commentsByPostIdQueryVariables;
 };
 
 
 
 /*
-query postsQuery {
-  posts {
+query commentsByPostIdQuery(
+  $postId: String!
+) {
+  commentsByPostId(postId: $postId) {
     id
     content
-    title
     author {
       login
       id
@@ -36,28 +38,35 @@ query postsQuery {
 */
 
 const node: ConcreteRequest = (function(){
-var v0 = {
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "postId"
+  }
+],
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "postId",
+    "variableName": "postId"
+  }
+],
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v1 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "content",
   "storageKey": null
 },
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "title",
-  "storageKey": null
-},
-v3 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -66,22 +75,21 @@ v3 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "postsQuery",
+    "name": "commentsByPostIdQuery",
     "selections": [
       {
         "alias": null,
-        "args": null,
-        "concreteType": "Post",
+        "args": (v1/*: any*/),
+        "concreteType": "Comment",
         "kind": "LinkedField",
-        "name": "posts",
+        "name": "commentsByPostId",
         "plural": true,
         "selections": [
-          (v0/*: any*/),
-          (v1/*: any*/),
           (v2/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -90,7 +98,7 @@ return {
             "name": "author",
             "plural": false,
             "selections": [
-              (v3/*: any*/)
+              (v4/*: any*/)
             ],
             "storageKey": null
           }
@@ -103,21 +111,20 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "postsQuery",
+    "name": "commentsByPostIdQuery",
     "selections": [
       {
         "alias": null,
-        "args": null,
-        "concreteType": "Post",
+        "args": (v1/*: any*/),
+        "concreteType": "Comment",
         "kind": "LinkedField",
-        "name": "posts",
+        "name": "commentsByPostId",
         "plural": true,
         "selections": [
-          (v0/*: any*/),
-          (v1/*: any*/),
           (v2/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -126,8 +133,8 @@ return {
             "name": "author",
             "plural": false,
             "selections": [
-              (v3/*: any*/),
-              (v0/*: any*/)
+              (v4/*: any*/),
+              (v2/*: any*/)
             ],
             "storageKey": null
           }
@@ -137,14 +144,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6b3faed7207ca084c752ff1836d00cc6",
+    "cacheID": "82fc69a8bb78567fc33996e32a02d846",
     "id": null,
     "metadata": {},
-    "name": "postsQuery",
+    "name": "commentsByPostIdQuery",
     "operationKind": "query",
-    "text": "query postsQuery {\n  posts {\n    id\n    content\n    title\n    author {\n      login\n      id\n    }\n  }\n}\n"
+    "text": "query commentsByPostIdQuery(\n  $postId: String!\n) {\n  commentsByPostId(postId: $postId) {\n    id\n    content\n    author {\n      login\n      id\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '51740f5c5d5fa8edefd2f45aa99eff00';
+(node as any).hash = '5e297bae8d9e618090a1bcaca34ded96';
 export default node;
