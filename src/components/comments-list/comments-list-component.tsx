@@ -4,22 +4,22 @@ import { useRelayEnvironment } from 'react-relay/hooks';
 
 import './styles/comments-list-styles.scss';
 
-import { commentsByPostIdQuery } from '../../requests/comments';
-import { commentsByPostIdQuery as commentsByPostIdQueryType } from '../../requests/__generated__/commentsByPostIdQuery.graphql';
-import { UserInfo } from '../user-info/user-info-component';
+import { commentsByPostIdQuery } from '../../requests/comment';
+import { commentsByPostIdQuery as CommentsByPostIdQueryType } from '../../requests/__generated__/commentsByPostIdQuery.graphql';
+import { UserInfoComponent } from '../user-info/user-info-component';
 
 interface ICommentsListComponentProps {
 	postId: string;
 }
 
-const RenderCommentsListComponent: QueryRenderer<commentsByPostIdQueryType>['props']['render'] = ({ error, props }) => {
+const RenderCommentsListComponent: QueryRenderer<CommentsByPostIdQueryType>['props']['render'] = ({ error, props }) => {
 	if (error) {
 		return <div>{error.message}</div>;
 	} else if (props && props.commentsByPostId) {
 		if (props.commentsByPostId.length) {
 			const comments = props.commentsByPostId.map((comment) => {
 				return <div className="comment-block" key={comment.id}>
-					<UserInfo author={comment.author} displatAvatar={true}></UserInfo>
+					<UserInfoComponent author={comment.author} displayAvatar={true}></UserInfoComponent>
 					<div className="comment-block__comment-text">{comment.content}</div>
 				</div>
 			});
@@ -37,10 +37,10 @@ export const CommentsListComponent = (props: ICommentsListComponentProps) => {
 	const environment = useRelayEnvironment();
 
 	return (
-		<QueryRenderer <commentsByPostIdQueryType>
+		<QueryRenderer <CommentsByPostIdQueryType>
 			environment={environment}
 			query={commentsByPostIdQuery}
 			variables={{ postId: props.postId }}
-			render={RenderCommentsListComponent}></QueryRenderer>
+			render={RenderCommentsListComponent} />
 	);
 }

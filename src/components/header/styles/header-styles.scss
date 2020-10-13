@@ -1,0 +1,15 @@
+.header-block {
+	display: flex;
+	width: 70%;
+	margin: 20px auto;
+	align-items: center;
+
+	&__logout-link {
+		transition: .3s;
+
+		&:hover {
+			cursor: pointer;
+			color: #c93e6c;
+		}
+	}
+}

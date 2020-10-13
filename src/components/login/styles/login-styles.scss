@@ -1,0 +1,41 @@
+.login-form {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	width: 15em;
+
+	&__login-input, &__password-input {
+		margin: 10px 0;
+		&:focus {
+			outline: none;
+		}
+	}
+
+	&__submit-button {
+		width: 5em;
+		margin: auto;
+		color: white;
+		background-color: rgba($color: #8f8f8f, $alpha: .5);
+		border: 1px solid #8f8f8f;
+		border-radius: 10px;
+		transition: 0.3s;
+
+		&:disabled {
+			cursor: default;
+		}
+
+		&:enabled {
+			background-color: #8f8f8f;
+			border: 1px solid black;
+		}
+
+		&:enabled:hover {
+			cursor: pointer;
+			background-color: #636363;
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+}

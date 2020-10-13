@@ -20,3 +20,15 @@ export const commentsByPostIdQuery = graphql`
         }
     }
 `;
+
+export const commentCreateMutation = graphql`
+	mutation commentCreateMutation($data: CommentInput!) {
+		createComment(data: $data) {
+			id
+			content
+			author {
+				login
+			}
+		}
+	}
+`;

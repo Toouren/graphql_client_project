@@ -7,7 +7,7 @@ import './styles/posts-list-styles.scss';
 
 import { postsQuery } from '../../requests/post';
 import { postsQuery as postsQueryType } from '../../requests/__generated__/postsQuery.graphql';
-import { UserInfo } from '../user-info/user-info-component';
+import { UserInfoComponent } from '../user-info/user-info-component';
 
 const RenderPostsListComponent: QueryRenderer<postsQueryType>['props']['render'] = ({ error, props }) => {
 	if (error) {
@@ -20,7 +20,7 @@ const RenderPostsListComponent: QueryRenderer<postsQueryType>['props']['render']
 					<Link to={`/post/${post.id}`} className="post-header">
 						<h3 className="post-header__title">{post.title}</h3>
 						<div className="post-header__author-info">
-							Автор: <UserInfo author={post.author}></UserInfo>
+							Автор: <UserInfoComponent author={post.author}></UserInfoComponent>
 						</div>
 					</Link>
 					<div className="post-block__content">{post.content.length > 100 ? post.content.slice(0, 100) + '...' : post.content}</div>

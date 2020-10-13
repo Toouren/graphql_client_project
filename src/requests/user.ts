@@ -7,3 +7,12 @@ export const usersQuery = graphql`
         }
     }
 `;
+
+export const userQuery = graphql`
+    query userQuery {
+        user {
+			login
+			name
+        }
+    }
+`;

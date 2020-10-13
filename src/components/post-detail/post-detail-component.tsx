@@ -5,11 +5,12 @@ import { useRelayEnvironment } from 'react-relay/hooks';
 import { postQuery } from '../../requests/post';
 
 import { postQuery as postQueryType } from '../../requests/__generated__/postQuery.graphql';
-import { UserInfo } from '../user-info/user-info-component';
+import { UserInfoComponent } from '../user-info/user-info-component';
 import { useParams } from 'react-router-dom';
 import { CommentsListComponent } from '../comments-list/comments-list-component';
 
 import './styles/post-detail-styles.scss';
+import { NewCommentFormComponent } from '../new-comment-form/new-comment-form-component';
 
 const RenderPostDetailComponent: QueryRenderer<postQueryType>['props']['render'] = ({ error, props }) => {
 	if (error) {
@@ -19,12 +20,13 @@ const RenderPostDetailComponent: QueryRenderer<postQueryType>['props']['render']
 			<div className="post-header">
 				<h3 className="post-header__title">{props.post.title}</h3>
 				<div className="post-header__user-info">
-					<UserInfo author={props.post.author} displatAvatar={true}></UserInfo>
+					<UserInfoComponent author={props.post.author} displayAvatar={true}></UserInfoComponent>
 				</div>
 			</div>
 			<div className="post-block__content">
 				<div className="post-block__post-text">{props.post.content}</div>
 				<CommentsListComponent postId={props.post.id}/>
+				<NewCommentFormComponent postId={props.post.id} />
 			</div>
 		</div>
 	} else {

@@ -50,7 +50,7 @@ type Query {
   post(id: String!): Post!
   posts: [Post!]!
   postsByUserId(userId: String!): [Post!]!
-  user(id: String!): User!
+  user: User!
   users: [User!]!
 }
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { fetchQuery, useRelayEnvironment } from 'react-relay/hooks';
 import { useHistory } from 'react-router-dom';
 
+import './styles/login-styles.scss';
+
 import { JWT_AUTH_TOKEN_KEY } from '../../constants/constants';
 import { loginQuery } from '../../requests/login';
 import { loginQuery as LoginQueryType } from '../../requests/__generated__/loginQuery.graphql';
@@ -51,7 +53,7 @@ export const LoginComponent: React.FunctionComponent = () => {
 		).subscribe({
 			next: (data: LoginQueryType['response']) => {
 				localStorage.setItem(JWT_AUTH_TOKEN_KEY, data.login.accessToken);
-				history.replace({ pathname: '/main' });
+				history.replace({pathname: '/main'});
 			},
 			error: () => {
 				handleChangeError(true);
@@ -62,11 +64,11 @@ export const LoginComponent: React.FunctionComponent = () => {
 	}, [environment, login, password, history, handleChangeError]);
 
 	return (
-		<div>
+		<div className="login-form">
 			<LoginErrorComponent error={error}></LoginErrorComponent>
-			<input type="text" value={login} onChange={handleChangeLogin} />
-			<input type="password" value={password} onChange={handleChangePassword} />
-			<button disabled={submitButtonDisabled} onClick={handleSubmit}>Войти</button>
+			<input className="login-form__login-input" type="text" value={login} onChange={handleChangeLogin} />
+			<input className="login-form__password-input" type="password" value={password} onChange={handleChangePassword} />
+			<button className="login-form__submit-button" disabled={submitButtonDisabled} onClick={handleSubmit}>Войти</button>
 		</div>
 	);
 
