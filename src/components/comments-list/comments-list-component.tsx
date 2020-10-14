@@ -7,6 +7,7 @@ import './styles/comments-list-styles.scss';
 import { commentsByPostIdQuery } from '../../requests/comment';
 import { commentsByPostIdQuery as CommentsByPostIdQueryType } from '../../requests/__generated__/commentsByPostIdQuery.graphql';
 import { UserInfoComponent } from '../user-info/user-info-component';
+import { LoaderComponent } from '../loader/loader-component';
 
 interface ICommentsListComponentProps {
 	postId: string;
@@ -30,7 +31,7 @@ const RenderCommentsListComponent: QueryRenderer<CommentsByPostIdQueryType>['pro
 		}
 	}
 
-	return <div>Loading</div>;
+	return <LoaderComponent/>;;
 }
 
 export const CommentsListComponent = (props: ICommentsListComponentProps) => {

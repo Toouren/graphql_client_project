@@ -1,0 +1,70 @@
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 15em;
+
+    &__auth-link {
+        color: black;
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 10px;
+
+        & > a {
+            color: black;
+        }
+    }
+
+    &__error {
+        color: #ff8c8c;
+        font-size: 12px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    &__header {
+        margin: auto;
+    }
+
+    &__login-input,
+	&__password-input,
+	&__name-input {
+        margin: 10px 0;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__submit-button {
+        margin: auto;
+        color: white;
+        background-color: rgba($color: #8f8f8f, $alpha: 0.5);
+        border: 1px solid #8f8f8f;
+        border-radius: 10px;
+        transition: 0.3s;
+
+        &:disabled {
+            cursor: default;
+        }
+
+        &:enabled {
+            background-color: #8f8f8f;
+            border: 1px solid black;
+        }
+
+        &:enabled:hover {
+            cursor: pointer;
+            background-color: #636363;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.registration-success {
+	color: #60d648;
+	margin: auto;
+	text-align: center;
+}

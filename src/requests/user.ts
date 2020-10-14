@@ -16,3 +16,11 @@ export const userQuery = graphql`
         }
     }
 `;
+
+export const userCreateMutation = graphql`
+	mutation userCreateMutation($data: UserInput!) {
+		createUser(data: $data) {
+			id
+		}
+	}
+`;

@@ -8,6 +8,7 @@ import './styles/posts-list-styles.scss';
 import { postsQuery } from '../../requests/post';
 import { postsQuery as postsQueryType } from '../../requests/__generated__/postsQuery.graphql';
 import { UserInfoComponent } from '../user-info/user-info-component';
+import { LoaderComponent } from '../loader/loader-component';
 
 const RenderPostsListComponent: QueryRenderer<postsQueryType>['props']['render'] = ({ error, props }) => {
 	if (error) {
@@ -29,11 +30,13 @@ const RenderPostsListComponent: QueryRenderer<postsQueryType>['props']['render']
 
 		return <div className="posts-list">{ posts }</div>
 		} else {
-			return <div>Постов пока нет</div>
+			return <div className="post-list">
+				<div className="post-list__empty-message">Постов пока нет</div>
+			</div>
 		}
 	}
 
-	return <div>Loading</div>;
+	return <LoaderComponent/>;
 }
 
 export const PostsListComponent = () => {

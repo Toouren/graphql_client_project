@@ -35,3 +35,16 @@ export const postsByUserIdQuery = graphql`
         }
     }
 `;
+
+export const postCreateMutation = graphql`
+    mutation postCreateMutation($data: PostInput!) {
+        createPost(data: $data) {
+            id
+            title
+			content
+			author {
+                login
+            }
+        }
+    }
+`;

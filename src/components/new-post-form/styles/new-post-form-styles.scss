@@ -1,33 +1,24 @@
-.login-form {
+.post-form {
+	margin: auto;
+	width: 70%;
 	display: flex;
 	flex-direction: column;
-	margin: auto;
-	width: 15em;
 
-	&__registration-link {
-		color: black;
-		text-align: center;
-		font-size: 12px;
+	&__title-input {
+		width: 100%;
+		font-size: 18px;
+	}
+
+	&__content-area {
+		min-width: 100%;
+		max-width: 100%;
+		min-height: 15em;
+		margin-top: 20px;
 		margin-bottom: 10px;
+		height: 15em;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 18px;
 
-		&>a {
-			color: black;
-		}
-	}
-
-	&__error {
-		color: #ff8c8c;
-		font-size: 12px;
-		margin-top: 10px;
-		text-align: center;
-	}
-
-	&__header {
-		margin: auto;
-	}
-
-	&__login-input, &__password-input {
-		margin: 10px 0;
 		&:focus {
 			outline: none;
 		}
@@ -40,7 +31,7 @@
 		border: 1px solid #8f8f8f;
 		border-radius: 10px;
 		transition: 0.3s;
-
+		
 		&:disabled {
 			cursor: default;
 		}
@@ -59,4 +50,10 @@
 			outline: none;
 		}
 	}
+}
+
+.post-success {
+	color: #60d648;
+	margin: auto;
+	text-align: center;
 }
